@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_about_bhanchha">About Bhanchha</string>
+    <string name="title_about_bhanchha_faq">FAQ</string>
+    <string name="title_about_bhanchha_feedback">Send Feedback</string>
+    <string name="title_about_bhanchha_aboutus">About Us</string>
+</resources>

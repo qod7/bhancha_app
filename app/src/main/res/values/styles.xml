@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="LoginActivityTheme" parent="android:Theme.Holo.Light.NoActionBar" />
+    <style name="AboutBhanchhaActivityTheme" parent="android:Theme.Holo.Light.NoActionBar" />
+
+    <color name="drawer_bg_color">#FDDD</color>
+
+    <color name="login_views_bg">#cfff</color>
+
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Bhanchha</string>
+    <string name="title_section_browse_food">Browse by Food</string>
+    <string name="title_section_browse_cook">Browse by Cook</string>
+    <string name="title_section_browse_favorites">Favorites</string>
+    <string name="title_section_about_bhanchha">About Bhanchha</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+
+    <integer name="drawer_position_browse_food">0</integer>
+    <integer name="drawer_position_browse_cook">1</integer>
+    <integer name="drawer_position_browse_favorites">2</integer>
+    <integer name="drawer_position_about_bhanchha">3</integer>
+</resources>

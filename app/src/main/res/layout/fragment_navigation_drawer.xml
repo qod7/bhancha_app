@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/drawer_bg_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#FAD3">
+
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tvProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="34dp"
+            android:layout_marginLeft="16dp"
+            android:text="Shashwat Black"
+            android:textSize="18dp"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/tvEmailId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="16dp"
+            android:text="shashwat.black@gmail.com"
+            android:textSize="14dp" />
+    </RelativeLayout>
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigation_drawer_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="#cccc"
+        tools:context=".NavigationDrawerFragment" />
+
+</LinearLayout>
