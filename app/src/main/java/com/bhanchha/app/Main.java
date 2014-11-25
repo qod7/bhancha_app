@@ -56,11 +56,26 @@ public class Main extends Activity
         if (position == getResources().getInteger(R.integer.drawer_position_about_bhanchha)) {
             Intent intent = new Intent(this, AboutBhanchhaActivity.class);
             startActivity(intent);
+        } else {
+            FragmentManager fragmentManager = getFragmentManager();
+            if (position == getResources().getInteger(R.integer.drawer_position_browse_food)) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, BrowseFoodFragment.newInstance())
+                        .commit();
+            } else if (position == getResources().getInteger(R.integer.drawer_position_browse_cook)) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, BrowseCookFragment.newInstance())
+                        .commit();
+            } else if (position == getResources().getInteger(R.integer.drawer_position_browse_favorite)) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, BrowseFavoriteFragment.newInstance())
+                        .commit();
+            } else { // that is if a unicorn shows itself
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, PlaceholderFragment.newInstance(position+1))
+                        .commit();
+            }
         }
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
     }
 
     public void onSectionAttached(int number) {
@@ -72,7 +87,7 @@ public class Main extends Activity
                 mTitle = getString(R.string.title_section_browse_cook);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section_browse_favorites);
+                mTitle = getString(R.string.title_section_browse_favorite);
                 break;
         }
     }
@@ -147,6 +162,8 @@ public class Main extends Activity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            ((TextView) rootView.findViewById(R.id.section_label))
+                    .setText("This phucker is called Section " + getArguments().getInt(ARG_SECTION_NUMBER));
             return rootView;
         }
 

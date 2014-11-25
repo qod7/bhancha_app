@@ -105,7 +105,7 @@ public class NavigationDrawerFragment extends Fragment {
                 new String[]{
                         getString(R.string.title_section_browse_food),
                         getString(R.string.title_section_browse_cook),
-                        getString(R.string.title_section_browse_favorites),
+                        getString(R.string.title_section_browse_favorite),
                         getString(R.string.title_section_about_bhanchha),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
@@ -191,7 +191,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
-        if (position <= getResources().getInteger(R.integer.drawer_position_browse_favorites)) {
+        if (position <= getResources().getInteger(R.integer.drawer_position_browse_favorite)) {
             mCurrentSelectedPosition = position;
             if (mDrawerListView != null) {
                 mDrawerListView.setItemChecked(position, true);
