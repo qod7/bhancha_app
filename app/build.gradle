@@ -24,4 +24,28 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.1.71'
     compile 'com.android.support:support-v4:21.0.2'
     compile 'com.android.support:support-v13:21.0.2'
+
+    // for asyc HTTP Request
+    compile 'com.loopj.android:android-async-http:1.4.5'
+}
+
+// Card View Dependencies
+dependencies {
+    //Core
+    compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1'
+
+    //Optional for built-in cards
+    compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
+
+//    //Optional for RecyclerView
+//    compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.0.1'
+//
+//    //Optional for staggered grid view
+//    compile 'com.github.gabrielemariotti.cards:cardslib-extra-staggeredgrid:2.0.1'
+//
+//    //Optional for drag and drop
+//    compile 'com.github.gabrielemariotti.cards:cardslib-extra-dragdrop:2.0.1'
+//
+//    //Optional for twoway  (coming soon)
+//    //compile 'com.github.gabrielemariotti.cards:cardslib-extra-twoway:2.0.1'
 }

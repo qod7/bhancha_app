@@ -4,8 +4,13 @@
     <style name="AppTheme" parent="android:Theme.Holo.Light">
         <!-- Customize your theme here. -->
     </style>
-    <style name="LoginActivityTheme" parent="android:Theme.Holo.Light.NoActionBar" />
+
     <style name="AboutBhanchhaActivityTheme" parent="android:Theme.Holo.Light.NoActionBar" />
+    <style name="LoginActivityTheme" parent="android:Theme.Holo.Light.NoActionBar" />
+
+    <style name="OverlayActionBarTheme" parent="@android:Theme.Holo.Light">
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
 
     <color name="drawer_bg_color">#FDDD</color>
 

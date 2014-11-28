@@ -2,12 +2,28 @@ package com.bhanchha.app;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardGridArrayAdapter;
+import it.gmariotti.cardslib.library.view.CardGridView;
 
 
 /**
@@ -65,7 +81,71 @@ public class BrowseFoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_browse_food, container, false);
+        View view = inflater.inflate(R.layout.fragment_browse_food, container, false);
+        // Do something with the view. If needed.
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        //super.onViewCreated(view, savedInstanceState);
+        updateFoodCards();
+    }
+
+    private void updateFoodCards() {
+        // first request and fetch json data from server
+                //http://localhost:81/samplejson
+        // on success, update the UI
+        final ArrayList<Card> cardArray = new ArrayList<Card>();
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://192.168.2.110:81/samplejson", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                CustomCard customCard = null;
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject row = null;
+                    customCard = new CustomCard(getActivity(), R.layout.custom_card);
+                    try {
+                        row = response.getJSONObject(i);
+                        customCard.cAddCardTitle(row.getString("id") + " " + row.getString("name"));
+                        customCard.cAddCardImage(R.drawable.ic_launcher);
+                        cardArray.add(customCard);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                CardGridArrayAdapter mCardArrayAdapter = new CardGridArrayAdapter(getActivity(), cardArray);
+                CardGridView gridView = (CardGridView) getView().findViewById(R.id.foodCardGrid);
+                if (gridView!=null) {
+                    gridView.setAdapter(mCardArrayAdapter);
+                }
+            }
+        });
+    }
+
+    public void fetchJSON () {
+        AsyncHttpClient client = new AsyncHttpClient();
+        //https://api.github.com/users/mralexgray/repos
+        client.get("http://ip.jsontest.com/", new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                // called when response HTTP status is "200 OK"
+                try {
+                    Toast.makeText(getActivity(), "Your ip is: " + response.getString("ip"), Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    Toast.makeText(getActivity(), "Check your internet connection and try again.", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(getActivity(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

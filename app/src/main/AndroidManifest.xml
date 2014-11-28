@@ -13,13 +13,11 @@
             android:theme="@style/LoginActivityTheme"
             android:windowSoftInputMode="stateHidden|adjustPan" >
 
-            <!--
-            intent-filter>
+            <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter
-            -->
+            </intent-filter-->
         </activity>
         <activity
             android:name=".Main"
@@ -38,7 +36,8 @@
         <activity
             android:name=".AboutBhanchhaActivity"
             android:label="@string/title_activity_about_bhanchha"
-            android:parentActivityName=".Main">
+            android:parentActivityName=".Main"
+            android:theme="@style/OverlayActionBarTheme">
         </activity>
     </application>
 

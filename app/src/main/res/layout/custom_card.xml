@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/cardImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/food_pic1"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
+    <TextView
+        android:id="@+id/cardTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/cardImage"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="#a0000000"
+        android:textColor="#ffffffff"
+        android:textSize="20dp"
+        android:singleLine="true"
+        android:text="Hello Blub"/>
+    <TextView
+        android:id="@+id/cardBrief"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardImage"
+        android:gravity="center"
+        android:padding="15dp"
+        android:background="#000000"
+        android:textColor="#ffffffff"
+        android:textSize="15dp"
+        android:singleLine="true"
+        android:text="Some Extra Information"/>
+
+</RelativeLayout>

@@ -7,6 +7,11 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -16,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 
@@ -78,6 +84,9 @@ public class AboutBhanchhaActivity extends Activity implements ActionBar.TabList
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+        //Make the actionbar look decent
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#55FFFFFF")));
+        actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#55FFFFFF")));
     }
 
 
