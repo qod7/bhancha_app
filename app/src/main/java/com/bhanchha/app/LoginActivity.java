@@ -249,6 +249,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
 
     private void login() {
+        // set userPass for server connection
+        BuildURL.setUserPass(mEmailView.getText().toString(), mPasswordView.getText().toString());
+        // start main activity
         Intent intent = new Intent(this, Main.class);
         startActivity(intent);
     }

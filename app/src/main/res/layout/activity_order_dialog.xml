@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.bhanchha.dummyapp.orderDialogActivity">
+
+    <TextView
+        android:id="@+id/orderDialogText"
+        android:text="Make an order?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_margin="20dp"
+        android:layout_marginLeft="30dp"/>
+
+    <Button
+        android:id="@+id/orderDialogConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/orderDialogText"
+        android:layout_margin="20dp"
+        android:text="Place Order"
+        android:padding="20dp"
+        android:background="#107010"
+        android:textColor="#ffffff"
+        android:onClick="confirmOrder"/>
+
+    <Button
+        android:id="@+id/orderDialogCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/orderDialogText"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="20dp"
+        android:text="Cancel"
+        android:background="#dddddd"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:textColor="#444444"
+        android:onClick="cancel"/>
+
+</RelativeLayout>

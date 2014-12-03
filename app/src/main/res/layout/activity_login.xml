@@ -46,6 +46,10 @@
 
     </ViewFlipper>
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="#50000000"/>
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"

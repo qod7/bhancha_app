@@ -11,5 +11,11 @@
         android:text="Here will favorite shits go"
         android:gravity="center"
         android:layout_margin="40dp"/>
+    <ImageView
+        android:id="@+id/favorite_placeholder_imageview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/placeholder_favorite"
+        android:background="#dedede"/>
 
 </FrameLayout>

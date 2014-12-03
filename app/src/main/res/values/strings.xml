@@ -2,10 +2,17 @@
 <resources>
 
     <string name="app_name">Bhanchha</string>
+
     <string name="title_section_browse_food">Browse by Food</string>
     <string name="title_section_browse_cook">Browse by Cook</string>
     <string name="title_section_browse_favorite">Favorites</string>
+    <string name="title_section_my_orders">My Orders</string>
     <string name="title_section_about_bhanchha">About Bhanchha</string>
+    <string name="title_activity_food_page">Select a cook</string>
+    <string name="title_activity_cook_page">Select a food</string>
+    <string name="title_activity_my_orders">My Orders</string>
+    <string name="title_activity_order_dialog">Place Order</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -15,6 +22,7 @@
     <integer name="drawer_position_browse_food">0</integer>
     <integer name="drawer_position_browse_cook">1</integer>
     <integer name="drawer_position_browse_favorite">2</integer>
-    <integer name="drawer_position_about_bhanchha">3</integer>
+    <integer name="drawer_position_my_orders">3</integer>
+    <integer name="drawer_position_about_bhanchha">4</integer>
 
 </resources>

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="#FAD3">
+        android:background="@drawable/food_pic_blurred">
 
         <ImageView
             android:id="@+id/ivProfilePicture"
@@ -25,9 +25,11 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="34dp"
             android:layout_marginLeft="16dp"
-            android:text="Shashwat Black"
+            android:text="Team Qod"
             android:textSize="18dp"
-            android:typeface="normal" />
+            android:typeface="normal"
+            android:textColor="#eeeeee"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvEmailId"
@@ -36,19 +38,45 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="14dp"
             android:layout_marginLeft="16dp"
-            android:text="shashwat.black@gmail.com"
-            android:textSize="14dp" />
+            android:text="teambhanchha@gmail.com"
+            android:textSize="14dp"
+            android:textColor="#eeeeee"
+            android:textStyle="bold" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/navigation_drawer_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#cccc"
-        tools:context=".NavigationDrawerFragment" />
+        android:background="@color/drawer_bg_color"
+        tools:context=".NavigationDrawerFragment"
+        android:paddingLeft="12dp"/>
+
+        <Button
+            android:id="@+id/buttonLogout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="20dp"
+            android:background="@color/drawer_bg_color"
+            android:layout_alignParentBottom="true"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="20dp"
+            android:background="@color/drawer_bg_color"
+            android:layout_above="@id/buttonLogout"/>
+    </RelativeLayout>
 
 </LinearLayout>

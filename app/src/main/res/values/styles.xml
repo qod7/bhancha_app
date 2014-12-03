@@ -16,4 +16,8 @@
 
     <color name="login_views_bg">#cfff</color>
 
+    <color name="app_bg_color">#eeeeee</color>
+
+    <color name="blaak">#000</color>
+
 </resources>

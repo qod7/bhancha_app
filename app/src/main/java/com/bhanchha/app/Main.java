@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -39,6 +40,7 @@ public class Main extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //getActionBar().setBackgroundDrawable(new ColorDrawable(0xff8f5c23));
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -53,7 +55,10 @@ public class Main extends Activity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments or switching activity
-        if (position == getResources().getInteger(R.integer.drawer_position_about_bhanchha)) {
+        if (position == getResources().getInteger(R.integer.drawer_position_my_orders)) {
+            Intent intent = new Intent(this, MyOrdersActivity.class);
+            startActivity(intent);
+        } else if (position == getResources().getInteger(R.integer.drawer_position_about_bhanchha)) {
             Intent intent = new Intent(this, AboutBhanchhaActivity.class);
             startActivity(intent);
         } else {
@@ -71,10 +76,10 @@ public class Main extends Activity
                         .replace(R.id.container, BrowseFavoriteFragment.newInstance())
                         .commit();
             } else { // that is if a unicorn shows itself
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(position+1))
-                        .commit();
-            }
+                             fragmentManager.beginTransaction()
+                                     .replace(R.id.container, PlaceholderFragment.newInstance(position+1))
+                                     .commit();
+                         }
         }
     }
 

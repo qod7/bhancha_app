@@ -37,7 +37,24 @@
             android:name=".AboutBhanchhaActivity"
             android:label="@string/title_activity_about_bhanchha"
             android:parentActivityName=".Main"
-            android:theme="@style/OverlayActionBarTheme">
+            android:theme="@style/OverlayActionBarTheme" >
+        </activity>
+        <activity
+            android:name=".FoodPageActivity"
+            android:label="@string/title_activity_food_page" >
+        </activity>
+        <activity
+            android:name=".CookPageActivity"
+            android:label="@string/title_activity_cook_page" >
+        </activity>
+        <activity
+            android:name=".MyOrdersActivity"
+            android:label="@string/title_activity_my_orders" >
+        </activity>
+        <activity
+            android:name=".OrderDialogActivity"
+            android:label="@string/title_activity_order_dialog"
+            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar.MinWidth">
         </activity>
     </application>
 
