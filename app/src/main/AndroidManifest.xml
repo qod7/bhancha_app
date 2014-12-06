@@ -37,7 +37,7 @@
             android:name=".AboutBhanchhaActivity"
             android:label="@string/title_activity_about_bhanchha"
             android:parentActivityName=".Main"
-            android:theme="@style/OverlayActionBarTheme" >
+            android:theme="@style/OverlayActionBarTheme">
         </activity>
         <activity
             android:name=".FoodPageActivity"

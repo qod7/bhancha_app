@@ -86,10 +86,10 @@ public class FoodPageActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -114,6 +114,10 @@ public class FoodPageActivity extends Activity {
                     customCard.setOnClickListener(new Card.OnCardClickListener() {
                         @Override
                         public void onClick(Card card, View view) {
+                            if (mActionMode != null ){
+                                mActionMode.finish();
+                                return;
+                            }
                             onCustomCardClick((CustomCard)card);
                         }
                     });
@@ -122,7 +126,6 @@ public class FoodPageActivity extends Activity {
                         @Override
                         public boolean onLongClick(Card card, View view) {
                             if (mActionMode != null) {
-                                currentSelectedCard = null;
                                 mActionMode.finish();
                                 return false;
                             }
@@ -222,7 +225,7 @@ public class FoodPageActivity extends Activity {
 
     private void releaseSelectedCard() {
         // UI change
-        currentSelectedCard.cSetOverlayVisibility(View.GONE);
+        currentSelectedCard.cSetOverlayVisibility(View.INVISIBLE);
         currentSelectedCard.getCardView().refreshCard(currentSelectedCard);
         // release
         currentSelectedCard = null;

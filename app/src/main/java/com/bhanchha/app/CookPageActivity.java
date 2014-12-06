@@ -60,10 +60,10 @@ public class CookPageActivity extends Activity {
          // Handle action bar item clicks here. The action bar will
          // automatically handle clicks on the Home/Up button, so long
          // as you specify a parent activity in AndroidManifest.xml.
-         int id = item.getItemId();
-         if (id == R.id.action_settings) {
-             return true;
-         }
+//         int id = item.getItemId();
+//         if (id == R.id.action_settings) {
+//             return true;
+//         }
          return super.onOptionsItemSelected(item);
      }
 
@@ -112,7 +112,7 @@ public class CookPageActivity extends Activity {
                          row = foods.getJSONObject(i);
                          customCard.setIdentifier(row.getString("id"));
                          customCard.cAddCardTitle(row.getString("name"));
-                         customCard.cAddCardImage(BuildURL.cookImage(row.getString("image_id")));
+                         customCard.cAddCardImage(BuildURL.foodImage(row.getString("image_id")));
                          cardArray.add(customCard);
                      } catch (JSONException e) {
                          e.printStackTrace();
@@ -196,7 +196,7 @@ public class CookPageActivity extends Activity {
 
      private void releaseSelectedCard() {
          // UI change
-         currentSelectedCard.cSetOverlayVisibility(View.GONE);
+         currentSelectedCard.cSetOverlayVisibility(View.INVISIBLE);
          currentSelectedCard.getCardView().refreshCard(currentSelectedCard);
          // release
          currentSelectedCard = null;

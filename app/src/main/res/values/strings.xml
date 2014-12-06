@@ -25,4 +25,19 @@
     <integer name="drawer_position_my_orders">3</integer>
     <integer name="drawer_position_about_bhanchha">4</integer>
 
+    <string-array name="drawerItemNames">
+        <item>@string/title_section_browse_food</item>
+        <item>@string/title_section_browse_cook</item>
+        <item>@string/title_section_browse_favorite</item>
+        <item>@string/title_section_my_orders</item>
+        <item>@string/title_section_about_bhanchha</item>
+    </string-array>
+
+    <integer-array name="drawerItemIcons">
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+    </integer-array>
 </resources>

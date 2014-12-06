@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Main extends Activity
@@ -30,10 +32,17 @@ public class Main extends Activity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private DrawerLayout mDrawerLayout;
 
+    private boolean backAgainNotice = false;
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() { backAgainNotice = false; }
+    };
+
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
-    private CharSequence mTitle;
+    private CharSequence mTitle = getString(R.string.title_section_browse_cook);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +62,11 @@ public class Main extends Activity
     }
 
     @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+    }
+
+    @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments or switching activity
         if (position == getResources().getInteger(R.integer.drawer_position_my_orders)) {
@@ -67,14 +81,17 @@ public class Main extends Activity
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, BrowseFoodFragment.newInstance())
                         .commit();
+                mTitle = getString(R.string.title_section_browse_food);
             } else if (position == getResources().getInteger(R.integer.drawer_position_browse_cook)) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, BrowseCookFragment.newInstance())
                         .commit();
+                mTitle = getString(R.string.title_section_browse_cook);
             } else if (position == getResources().getInteger(R.integer.drawer_position_browse_favorite)) {
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, BrowseFavoriteFragment.newInstance())
                         .commit();
+                mTitle = getString(R.string.title_section_browse_favorite);
             } else { // that is if a unicorn shows itself
                              fragmentManager.beginTransaction()
                                      .replace(R.id.container, PlaceholderFragment.newInstance(position+1))
@@ -84,6 +101,7 @@ public class Main extends Activity
     }
 
     public void onSectionAttached(int number) {
+        // has become non functional for some unknown reason
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section_browse_food);
@@ -101,6 +119,8 @@ public class Main extends Activity
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
+        //actionBar.setHomeButtonEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setTitle(mTitle);
     }
 
@@ -123,10 +143,10 @@ public class Main extends Activity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -134,8 +154,16 @@ public class Main extends Activity
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(Gravity.START))
             mDrawerLayout.closeDrawer(Gravity.START);
-        else
-            super.onBackPressed();
+        else {
+            if (backAgainNotice)
+                super.onBackPressed();
+            else {
+                backAgainNotice = true;
+                // set timer to set it to false
+                timerHandler.postDelayed(timerRunnable, 3500);
+                Toast.makeText(this, "Press again to exit", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     /**
