@@ -42,7 +42,7 @@ public class Main extends Activity
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
-    private CharSequence mTitle = getString(R.string.title_section_browse_cook);
+    private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +53,12 @@ public class Main extends Activity
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mTitle = getTitle();
-
+        //mTitle = getTitle();
+        mTitle = getString(R.string.title_section_browse_food);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 mDrawerLayout);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
     }
 
     @Override
@@ -120,8 +115,9 @@ public class Main extends Activity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         //actionBar.setHomeButtonEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setTitle(mTitle);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setTitle("    " + mTitle);
+        // ^ The title looks baaad on 4.4-. A little space does some magic.
     }
 
 

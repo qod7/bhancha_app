@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -87,6 +88,7 @@ public class BrowseCookFragment extends Fragment {
         client.get(BuildURL.browseCook(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                if (getActivity() == null) return;
                 successfulResponse = response;
                 CustomCard customCard = null;
                 for (int i = 0; i < response.length(); i++) {
@@ -109,18 +111,60 @@ public class BrowseCookFragment extends Fragment {
                     }
                 }
                 CardGridArrayAdapter mCardArrayAdapter = new CardGridArrayAdapter(getActivity(), cardArray);
-                CardGridView gridView = (CardGridView) getView().findViewById(R.id.cookCardGrid);
+                final CardGridView gridView = (CardGridView) getView().findViewById(R.id.cookCardGrid);
                 if (gridView!=null) {
                     gridView.setAdapter(mCardArrayAdapter);
+                    // when scrolling up on the list view, the on-refresh is fired. The following fixes that
+                    gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                        }
+
+                        @Override
+                        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                            int topRowVerticalPosition =
+                                    (gridView == null || gridView.getChildCount() == 0) ?
+                                            0 : gridView.getChildAt(0).getTop();
+                            swipeLayout.setEnabled(topRowVerticalPosition >= 0);
+                        }
+                    });
                 }
             }
 
             @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                showPlaceholder();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                showPlaceholder();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                showPlaceholder();
+            }
+
+            @Override
             public void onFinish() {
+                if (getActivity() == null) return;
                 super.onFinish();
                 swipeLayout.setRefreshing(false);
             }
         });
+    }
+
+    private void showPlaceholder() {
+        if (getActivity() == null) return;
+        //show no-connection placeholder here if view is empty
+        if (((CardGridView) getView().findViewById(R.id.cookCardGrid)).getChildCount() == 0) {
+            getActivity().findViewById(R.id.browse_cook_no_connection_placeholder).setVisibility(View.VISIBLE);
+        }
     }
 
     public void onCustomCardClick(Card card) {

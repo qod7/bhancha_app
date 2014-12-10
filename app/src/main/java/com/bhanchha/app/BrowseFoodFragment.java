@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -120,6 +121,7 @@ public class BrowseFoodFragment extends Fragment {
         client.get(BuildURL.browseFood(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                if (getActivity() == null) return;
                 successfulResponse = response;
                 CustomCard customCard = null;
                 for (int i = 0; i < response.length(); i++) {
@@ -142,9 +144,24 @@ public class BrowseFoodFragment extends Fragment {
                     }
                 }
                 CardGridArrayAdapter mCardArrayAdapter = new CardGridArrayAdapter(getActivity(), cardArray);
-                CardGridView gridView = (CardGridView) getView().findViewById(R.id.foodCardGrid);
+                final CardGridView gridView = (CardGridView) getView().findViewById(R.id.foodCardGrid);
                 if (gridView != null) {
                     gridView.setAdapter(mCardArrayAdapter);
+                    // when scrolling up on the list view, the on-refresh is fired. The following fixes that
+                    gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                        }
+
+                        @Override
+                        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                            int topRowVerticalPosition =
+                                    (gridView == null || gridView.getChildCount() == 0) ?
+                                            0 : gridView.getChildAt(0).getTop();
+                            swipeLayout.setEnabled(topRowVerticalPosition >= 0);
+                        }
+                    });
                 }
 
                 // hide no-connection placeholder in case it's visible
@@ -172,6 +189,7 @@ public class BrowseFoodFragment extends Fragment {
 
             @Override
             public void onFinish() {
+                if (getActivity() == null) return;
                 super.onFinish();
                 swipeLayout.setRefreshing(false);
             }
@@ -179,6 +197,7 @@ public class BrowseFoodFragment extends Fragment {
     }
 
     private void showPlaceholder() {
+        if (getActivity() == null) return;
         //show no-connection placeholder here if view is empty
         if (((CardGridView) getView().findViewById(R.id.foodCardGrid)).getChildCount() == 0) {
             getActivity().findViewById(R.id.browse_food_no_connection_placeholder).setVisibility(View.VISIBLE);

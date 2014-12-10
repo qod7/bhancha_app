@@ -4,6 +4,8 @@ package com.bhanchha.app;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,8 +21,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -91,6 +101,8 @@ public class NavigationDrawerFragment extends Fragment {
             Bundle savedInstanceState) {
         View mDrawerView = inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+
+        // populate the nav drawer items
         mDrawerListView = (ListView) mDrawerView.findViewById(R.id.navigation_drawer_listview);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -113,6 +125,41 @@ public class NavigationDrawerFragment extends Fragment {
                 getResources().getStringArray(R.array.drawerItemNames),
                 getResources().obtainTypedArray(R.array.drawerItemIcons)));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
+        // users profile on nav drawer
+        HashMap<String, String> userDetails = new SessionManager(
+                getActivity().getApplicationContext()).getUserDetails();
+        final ImageView profilePicture = (ImageView) mDrawerView.findViewById(R.id.ivProfilePicture);
+        Target target = null;
+        if (target == null) {
+            target = new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    RoundImage roundedImage = new RoundImage(bitmap);
+                    profilePicture.setImageDrawable(roundedImage);
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
+
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                }
+            };
+        }
+        Picasso.with(getActivity())
+                    .load(BuildURL.userImage(userDetails.get(SessionManager.KEY_PROFILE_PICTURE)))
+                    .into(target);
+
+        TextView profileEmail = (TextView) mDrawerView.findViewById(R.id.tvEmailId);
+        profileEmail.setText(userDetails.get(SessionManager.KEY_EMAIL));
+
+        TextView profileName = (TextView) mDrawerView.findViewById(R.id.tvProfileName);
+        profileName.setText(userDetails.get(SessionManager.KEY_NAME));
+
         return mDrawerView;
     }
 
@@ -273,7 +320,7 @@ public class NavigationDrawerFragment extends Fragment {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
+        actionBar.setTitle("    " + getString(R.string.app_name));
     }
 
     private ActionBar getActionBar() {

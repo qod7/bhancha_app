@@ -54,6 +54,11 @@ public class MyOrdersActivity extends Activity {
      }
 
      private void setTableData(JSONArray response) {
+         if (this == null) return;
+         if (response.length() == 0) {
+             // show placeholder
+             return;
+         }
          TableLayout tableLayout = (TableLayout) findViewById(R.id.my_orders_table_layout);
          tableLayout.setVisibility(View.VISIBLE);
          tableLayout.removeViewsInLayout(1, tableLayout.getChildCount()-1);
@@ -95,7 +100,7 @@ public class MyOrdersActivity extends Activity {
      private boolean updateMyOrdersTable() {
          // new http request to retrieve orders
          AsyncHttpClient client = new AsyncHttpClient();
-         client.get(BuildURL.myOrders(), new JsonHttpResponseHandler() {
+         client.get(BuildURL.myOrders(getApplicationContext()), new JsonHttpResponseHandler() {
              @Override
              public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                  setTableData(response);
@@ -118,6 +123,7 @@ public class MyOrdersActivity extends Activity {
 
              @Override
              public void onFinish() {
+                 if (this == null) return;
                  super.onFinish();
                  swipeLayout.setRefreshing(false);
              }
